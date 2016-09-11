@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>DOM nested rule</title>
+</head>
+<body>
+	<ol>
+		<li>……</li>
+		<li>……</li>
+		<li>……</li>
+	</ol>
+
+	<ul>
+		<li>……</li>
+		<li>……</li>
+	</ul>
+
+	<dl>
+	    <dt>Today</dt>
+	    <dd>Today is yesterday.</dd>
+	    <dt>Tomorrow</dt>
+	    <dd>Tomorrow is today.</dd>
+	</dl> 
+
+	<select name="bid" id="brand_3">
+		<option value="">请选择品牌</option> 
+		<optgroup label="A"></optgroup>
+	    <option value="693" custom="693">A AC宝马</option>
+	    <option value="62" custom="62">A 阿斯顿马丁</option>
+	    <option value="1" custom="1">A 奥迪</option>
+	    <optgroup label="B"></optgroup>
+	    <option value="723" custom="723">B 巴博斯</option>
+	    <option value="44" custom="44">B 保时捷</option>
+	    <option value="582" custom="582">B 宝骏</option>
+    </select> 
+    <input type="button" name="button" id="btn">
+    <script type="text/javascript">
+    	//DOM2级事件
+    	var btn = document.getElementById('btn');
+    	function showMes() {
+    		alert('Hello world!');
+    	}
+    	btn.addEventListener('click', showMes, false);
+    	btn.removeEventListener('click', showMes, false);
+    	// 跨浏览器事件处理程序
+    	var eventUtil = {
+    		// 添加句柄 注意：传type的时候传没on的事件
+    		addHandler: function (element, type, handler) {
+    			if (element.addEventListener) {
+    				//DOM2 级判断完毕
+    				element.addEventListener(type, handler, false);
+    			}else if (element.attachEvent) {
+    				//IE事件处理程序判断
+    				element.attachEvent('on' +type, handler);
+    			}else {
+    				//DOM0级事件处理程序判断
+    				element['on' + type] = handler;	
+    			}
+    		},
+    		// 删除句柄 注意：传type的时候传没on的事件
+    		removeHandler: function (element, type, handler) {
+    			if (element.removeEventListener) {
+    				//DOM2 级判断完毕
+    				element.removeEventListener(type, handler, false);
+    			}else if (element.detachEvent) {
+    				//IE事件处理程序判断
+    				element.detachEvent('on' +type, handler);
+    			}else {
+    				//DOM0级事件处理程序判断
+    				element['on' + type] = null;	
+    			}
+    		}
+    	}
+    </script>
+</body>
+</html>
